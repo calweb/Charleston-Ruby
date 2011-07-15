@@ -3,8 +3,14 @@ class Ability
 
   def initialize(user)
     if user
-      can :manage, :all
+    
+      can [:create, :update], Project       
+      can :update, Member do |member| 
+        member == user
+      end
+      can :read, :all
     else
+      can :create, Member
       can :read, :all
     end
     
